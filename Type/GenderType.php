@@ -26,5 +26,4 @@ final class GenderType extends StringType
     {
         return true;
     }
-    
 }
