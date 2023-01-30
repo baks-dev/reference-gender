@@ -18,9 +18,9 @@
 
 namespace BaksDev\Reference\Gender\Type;
 
-enum GenderEnum: string
+enum GenderEnum : string
 {
-    case MEN = 'men'; // мужской
-    case WOMEN = 'women'; // женский
-
+	case MEN = 'men'; // мужской
+	case WOMEN = 'women'; // женский
+	
 }
