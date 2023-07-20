@@ -31,11 +31,6 @@
       "BaksDev\\Reference\\Gender\\": ""
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "BaksDev\\Reference\\Gender\\Tests\\": "Tests/"
-    }
-  },
   "config": {
     "sort-packages": true,
     "allow-plugins": {
