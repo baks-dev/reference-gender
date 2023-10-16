@@ -23,19 +23,19 @@ final class Gender
 	}
 	
 	
-	public function __toString() : string
+	public function __toString(): string
 	{
 		return $this->gender->value;
 	}
 	
 	
-	public function getValue() : string
+	public function getValue(): string
 	{
 		return $this->gender->value;
 	}
 	
 	
-	public function getName() : string
+	public function getName(): string
 	{
 		return $this->gender->name;
 	}
