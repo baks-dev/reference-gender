@@ -9,13 +9,13 @@ final class GenderType extends StringType
 {
 	public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
 	{
-		return $value instanceof Gender ? $value->getValue() : (new Gender($value))->getValue();
+		return (string) $value;
 	}
 	
 	
 	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
 	{
-		return !empty($value) ? new Gender($value) : $value;
+		return new Gender($value);
 	}
 	
 	

@@ -1,7 +1,7 @@
 {
   "namespaces": [
     {
-      "namespace": "Gender",
+      "namespace": "reference-gender",
       "path": "Resources/view"
     }
   ]
