@@ -8,4 +8,7 @@ return [
 	
 	'MEN' => 'Men',
 	'WOMEN' => 'Women',
+
+    'men' => 'Men',
+    'women' => 'Women',
 ];
