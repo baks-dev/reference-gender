@@ -11,11 +11,10 @@ final class GenderType extends StringType
 	{
 		return (string) $value;
 	}
-	
-	
+
 	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
 	{
-		return new Gender($value);
+        return !empty($value) ? new Gender($value) : null;
 	}
 	
 	
