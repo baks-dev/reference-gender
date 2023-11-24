@@ -3,11 +3,14 @@
 namespace BaksDev\Reference\Gender\Type;
 
 use BaksDev\Reference\Gender\Type\Genders\Collection\GenderInterface;
+use BaksDev\Reference\Gender\Type\Genders\GenderMen;
 
 /** Различие пола и гендера */
 final class Gender
 {
     public const TYPE = 'gender_type';
+
+    public const TEST = GenderMen::class;
 
     private GenderInterface $gender;
 
