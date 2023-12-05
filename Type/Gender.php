@@ -4,6 +4,7 @@ namespace BaksDev\Reference\Gender\Type;
 
 use BaksDev\Reference\Gender\Type\Genders\Collection\GenderInterface;
 use BaksDev\Reference\Gender\Type\Genders\GenderMen;
+use InvalidArgumentException;
 
 /** Различие пола и гендера */
 final class Gender
@@ -50,7 +51,7 @@ final class Gender
             }
         }
 
-        throw new \InvalidArgumentException(sprintf('Not found Gender %s', $gender));
+        throw new InvalidArgumentException(sprintf('Not found Gender %s', $gender));
     }
 
 
