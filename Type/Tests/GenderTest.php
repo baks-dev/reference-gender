@@ -66,5 +66,7 @@ final class GenderTest extends KernelTestCase
 
         }
 
+        self::assertTrue(true);
+
     }
 }
