@@ -1,6 +1,6 @@
 # BaksDev Gender
 
-[![Version](https://img.shields.io/badge/version-7.1.1-blue)](https://github.com/baks-dev/reference-gender/releases)
+[![Version](https://img.shields.io/badge/version-7.1.2-blue)](https://github.com/baks-dev/reference-gender/releases)
 ![php 8.3+](https://img.shields.io/badge/php-min%208.3-red.svg)
 
 Библиотека Gender
