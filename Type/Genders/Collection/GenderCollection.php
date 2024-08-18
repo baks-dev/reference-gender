@@ -25,14 +25,14 @@ declare(strict_types=1);
 
 namespace BaksDev\Reference\Gender\Type\Genders\Collection;
 
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 final class GenderCollection
 {
     private iterable $status;
 
     public function __construct(
-        #[TaggedIterator('baks.gender', defaultPriorityMethod: 'sort')] iterable $status,
+        #[AutowireIterator('baks.gender', defaultPriorityMethod: 'sort')] iterable $status,
     )
     {
         $this->status = $status;
