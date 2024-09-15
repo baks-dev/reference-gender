@@ -24,15 +24,24 @@
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use BaksDev\Reference\Gender\BaksDevReferenceGenderBundle;
-use Symfony\Config\FrameworkConfig;
 
-return static function(FrameworkConfig $config) {
+return static function (ContainerConfigurator $configurator) {
 
-    $config
-        ->translator()
-        ->paths([BaksDevReferenceGenderBundle::PATH.'Resources/translations/']);
+    $services = $configurator->services()
+        ->defaults()
+        ->autowire()
+        ->autoconfigure();
 
+    $NAMESPACE = BaksDevReferenceGenderBundle::NAMESPACE;
+    $PATH = BaksDevReferenceGenderBundle::PATH;
+
+    $services->load($NAMESPACE, $PATH)
+        ->exclude([
+            $PATH.'{Entity,Resources,Type}',
+            $PATH.'**'.DIRECTORY_SEPARATOR.'*Message.php',
+            $PATH.'**'.DIRECTORY_SEPARATOR.'*DTO.php',
+            $PATH.'**'.DIRECTORY_SEPARATOR.'*Test.php',
+        ]);
+
+    $services->load($NAMESPACE.'Type\Genders\\', $PATH.implode(DIRECTORY_SEPARATOR, ['Type', 'Genders']));
 };
-
-
-
