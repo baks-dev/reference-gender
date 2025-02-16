@@ -35,6 +35,9 @@ final class GenderGirl implements GenderInterface
 
     public const array HAYSTACK = [
         'Девочка',
+        'Девочки',
+        'Девочек',
+        'для девочек',
         'girl',
     ];
 

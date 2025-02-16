@@ -35,6 +35,8 @@ final class GenderBoy implements GenderInterface
 
     public const array HAYSTACK = [
         'Мальчик',
+        'Мальчики',
+        'для мальчиков',
         'boy',
     ];
 
