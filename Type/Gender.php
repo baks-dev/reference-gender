@@ -134,5 +134,19 @@ final class Gender
         return $this->gender->getValue();
     }
 
+    /**
+     * Метод фильтрует значение, удаляя его из строки
+     */
+    public function filter(string $gender): string
+    {
+        $haystack = array_map("mb_strtolower", $this->gender::HAYSTACK);
+
+        $gender = mb_strtolower($gender);
+        $gender = (string) str_ireplace($haystack, '', $gender);
+        $gender = preg_replace('/\s/', ' ', $gender);
+        $gender = trim($gender);
+
+        return mb_ucfirst($gender);
+    }
 
 }

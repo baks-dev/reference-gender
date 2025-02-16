@@ -21,30 +21,54 @@
  *  THE SOFTWARE.
  */
 
-namespace BaksDev\Reference\Gender\Type\Genders;
+declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+namespace BaksDev\Reference\Gender\Choice;
 
-#[AutoconfigureTag('baks.gender')]
-interface GenderInterface
+use BaksDev\Core\Services\Fields\FieldsChoiceInterface;
+use BaksDev\Reference\Gender\Form\GenderFieldForm;
+use BaksDev\Reference\Gender\Type\Gender;
+
+final class ReferenceChoiceGender implements FieldsChoiceInterface
 {
-    /**
-     * Возвращает значение (value)
-     */
-    public function getValue(): string;
+    public function equals($key): bool
+    {
+        return $key === Gender::TYPE;
+    }
 
-    /**
-     * Сортировка (чем меньше число - тем первым в итерации будет значение)
-     */
-    public static function sort(): int;
 
-    /**
-     * Проверяет, относится ли статус к данному объекту
-     */
-    public static function equals(string $gender): bool;
+    public function type(): string
+    {
+        return Gender::TYPE;
+    }
 
-    /**
-     * Метод фильтрует значение, удаляя его из строки
-     */
-    public static function filter(string $gender): string;
+
+    public function class(): string
+    {
+        return Gender::class;
+    }
+
+
+    public function choice(): array
+    {
+        return Gender::cases();
+    }
+
+
+    public function domain(): string
+    {
+        return Gender::TYPE;
+    }
+
+
+    /** Возвращает класс формы для рендера */
+    public function form(): string
+    {
+        return GenderFieldForm::class;
+    }
+
+    public function constraints(): ?array
+    {
+        return null;
+    }
 }

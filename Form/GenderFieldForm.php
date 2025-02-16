@@ -21,30 +21,26 @@
  *  THE SOFTWARE.
  */
 
-namespace BaksDev\Reference\Gender\Type\Genders;
+declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+namespace BaksDev\Reference\Gender\Form;
 
-#[AutoconfigureTag('baks.gender')]
-interface GenderInterface
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+final class GenderFieldForm extends AbstractType
 {
-    /**
-     * Возвращает значение (value)
-     */
-    public function getValue(): string;
+    public function buildForm(FormBuilderInterface $builder, array $options): void {}
 
-    /**
-     * Сортировка (чем меньше число - тем первым в итерации будет значение)
-     */
-    public static function sort(): int;
+    public function configureOptions(OptionsResolver $resolver): void {}
 
-    /**
-     * Проверяет, относится ли статус к данному объекту
-     */
-    public static function equals(string $gender): bool;
-
-    /**
-     * Метод фильтрует значение, удаляя его из строки
-     */
-    public static function filter(string $gender): string;
+    public function getParent(): string
+    {
+        return ChoiceType::class;
+    }
 }

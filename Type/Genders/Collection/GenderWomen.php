@@ -31,7 +31,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('baks.gender')]
 final class GenderWomen implements GenderInterface
 {
-    public const string STATUS = 'women';
+    public const string GENDER = 'women';
 
     public const array HAYSTACK = [
         'Женская',
@@ -43,7 +43,7 @@ final class GenderWomen implements GenderInterface
 
     public function getValue(): string
     {
-        return self::STATUS;
+        return self::GENDER;
     }
 
     /**
@@ -54,8 +54,24 @@ final class GenderWomen implements GenderInterface
         return 2;
     }
 
-    public static function equals(string $status): bool
+    public static function equals(string $gender): bool
     {
-        return self::STATUS === $status;
+        return array_any(self::HAYSTACK, static fn($item
+        ) => str_contains(mb_strtolower($gender), mb_strtolower($item)));
+    }
+
+    /**
+     * Метод фильтрует значение, удаляя его из строки
+     */
+    public static function filter(string $gender): string
+    {
+        $haystack = array_map("mb_strtolower", self::HAYSTACK);
+
+        $gender = mb_strtolower($gender);
+        $gender = (string) str_ireplace($haystack, '', $gender);
+        $gender = preg_replace('/\s/', ' ', $gender);
+        $gender = trim($gender);
+
+        return mb_ucfirst($gender);
     }
 }
