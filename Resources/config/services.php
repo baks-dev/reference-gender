@@ -24,8 +24,9 @@
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use BaksDev\Reference\Gender\BaksDevReferenceGenderBundle;
+use BaksDev\Reference\Gender\Choice\ReferenceChoiceGender;
 
-return static function (ContainerConfigurator $configurator) {
+return static function(ContainerConfigurator $configurator) {
 
     $services = $configurator->services()
         ->defaults()
@@ -45,6 +46,6 @@ return static function (ContainerConfigurator $configurator) {
 
     $services->load($NAMESPACE.'Type\Genders\\', $PATH.implode(DIRECTORY_SEPARATOR, ['Type', 'Genders']));
 
-    $services->set(TextareaFieldChoice::class)
+    $services->set(ReferenceChoiceGender::class)
         ->tag('baks.fields.choice');
 };
