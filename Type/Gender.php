@@ -89,7 +89,7 @@ final class Gender
 
         foreach(self::getDeclared() as $key => $gender)
         {
-            if(false === $unisex && $gender::class === GenderUnisex::class)
+            if(false === $unisex && $gender === GenderUnisex::class)
             {
                 continue;
             }

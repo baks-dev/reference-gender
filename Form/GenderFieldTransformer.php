@@ -25,41 +25,24 @@ declare(strict_types=1);
 
 namespace BaksDev\Reference\Gender\Form;
 
-
-use BaksDev\Reference\Color\Form\ColorFieldTransformer;
 use BaksDev\Reference\Gender\Type\Gender;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\DataTransformerInterface;
 
-final class GenderFieldForm extends AbstractType
+final class GenderFieldTransformer implements DataTransformerInterface
 {
-    public function __construct(private readonly GenderFieldTransformer $transformer) {}
-
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function transform(mixed $value): ?Gender
     {
-        $builder->addModelTransformer($this->transformer);
+        if(empty($value))
+        {
+            return null;
+        }
+
+        return new Gender($value);
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'choices' => Gender::cases(),
-            'choice_value' => function(?Gender $gender) {
-                return $gender?->getGenderValue();
-            },
-            'choice_label' => function(Gender $gender) {
-                return $gender->getGenderValue();
-            },
-            'translation_domain' => Gender::TYPE,
-            'placeholder' => 'placeholder',
-            'attr' => ['data-select' => 'select2'],
-        ]);
-    }
 
-    public function getParent(): string
+    public function reverseTransform(mixed $value): string
     {
-        return ChoiceType::class;
+        return (string) $value;
     }
 }

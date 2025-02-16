@@ -29,14 +29,13 @@ use BaksDev\Reference\Gender\Type\Genders\GenderInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('baks.gender')]
-final class GenderUnisex implements GenderInterface
+final class GenderBoy implements GenderInterface
 {
-    public const string GENDER = 'unisex';
+    public const string GENDER = 'boy';
 
     public const array HAYSTACK = [
-        'унисекс',
-        'юнисекс',
-        'unisex',
+        'Мальчик',
+        'boy',
     ];
 
     public function getValue(): string
@@ -49,7 +48,7 @@ final class GenderUnisex implements GenderInterface
      */
     public static function sort(): int
     {
-        return 6;
+        return 3;
     }
 
     public static function equals(string $gender): bool

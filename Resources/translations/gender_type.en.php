@@ -26,11 +26,15 @@ return [
     'PLACEHOLDER' => 'choose the floor',
     'Label' => 'Paul (gender)',
 
-    'Men' => 'male',
-    'Women' => 'female',
-    'Unisex' => 'unisex',
+    'MEN' => 'Men',
+    'WOMEN' => 'Women',
+    'UNISEX' => 'Unisex',
+    'BOY' => 'Boy',
+    'GIRL' => 'Girl',
 
-    'men' => 'male',
-    'women' => 'female',
-    'unisex' => 'unisex',
+    'men' => 'Men',
+    'women' => 'Women',
+    'boy' => 'Boy',
+    'girl' => 'Girl',
+    'unisex' => 'Unisex',
 ];
