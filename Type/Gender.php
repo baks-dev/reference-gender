@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +23,9 @@
 
 namespace BaksDev\Reference\Gender\Type;
 
-use BaksDev\Reference\Gender\Type\Genders\Collection\GenderInterface;
-use BaksDev\Reference\Gender\Type\Genders\GenderMen;
+use BaksDev\Reference\Gender\Type\Genders\Collection\GenderMen;
+use BaksDev\Reference\Gender\Type\Genders\Collection\GenderUnisex;
+use BaksDev\Reference\Gender\Type\Genders\GenderInterface;
 use InvalidArgumentException;
 
 /** Различие пола и гендера */
@@ -82,12 +83,17 @@ final class Gender
     }
 
 
-    public static function cases(): array
+    public static function cases(bool $unisex = true): array
     {
         $case = [];
 
         foreach(self::getDeclared() as $key => $gender)
         {
+            if(false === $unisex && $gender::class === GenderUnisex::class)
+            {
+                continue;
+            }
+
             /** @var GenderInterface $gender */
             $class = new $gender;
             $case[$class::sort().$key] = new self($gender);

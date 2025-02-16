@@ -23,42 +23,39 @@
 
 declare(strict_types=1);
 
-namespace BaksDev\Reference\Gender\Listeners\Event;
+namespace BaksDev\Reference\Gender\Type\Genders;
 
-use BaksDev\Reference\Gender\Type\Genders\GenderCollection;
-use BaksDev\Reference\Gender\Type\GenderType;
-use Symfony\Component\Console\ConsoleEvents;
-use Symfony\Component\Console\Event\ConsoleCommandEvent;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use BaksDev\Reference\Gender\Type\Genders\Collection\GenderUnisex;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
-/**
- * Слушатель инициирует Gender для определения в типе доктрины.
- */
-#[AsEventListener(event: ControllerEvent::class)]
-#[AsEventListener(event: ConsoleEvents::COMMAND)]
-final class GenderListener
+final class GenderCollection
 {
-    private GenderCollection $collection;
+    private iterable $gender;
 
-    public function __construct(GenderCollection $collection)
+    public function __construct(
+        #[AutowireIterator('baks.gender', defaultPriorityMethod: 'sort')] iterable $gender,
+    )
     {
-        $this->collection = $collection;
+        $this->gender = $gender;
     }
 
-    public function onKernelController(ControllerEvent $event): void
+    /** Возвращает массив из значений */
+    public function cases(bool $unisex = true): array
     {
-        // Инициируем статусы
-        if(in_array(GenderType::class, get_declared_classes(), true))
+        $case = null;
+
+        foreach($this->gender as $key => $gender)
         {
-            $this->collection->cases();
+            if(false === $unisex && ($gender::class === GenderUnisex::class))
+            {
+                continue;
+            }
+
+            $case[$gender::sort().$key] = new $gender();
         }
-    }
 
-    public function onConsoleCommand(ConsoleCommandEvent $event): void
-    {
-        // Всегда инициируем в консольной комманде
-        $this->collection->cases();
-    }
+        ksort($case);
 
+        return $case;
+    }
 }
