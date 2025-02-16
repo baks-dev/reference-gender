@@ -34,6 +34,7 @@ final class GenderMen implements GenderInterface
     public const string GENDER = 'men';
 
     public const array HAYSTACK = [
+        'Мужской',
         'Мужская',
         'Мужской',
         'Мужские',
@@ -69,7 +70,7 @@ final class GenderMen implements GenderInterface
 
         $gender = mb_strtolower($gender);
         $gender = (string) str_ireplace($haystack, '', $gender);
-        $gender = preg_replace('/\s/', ' ', $gender);
+        $gender = preg_replace('/\s+/', ' ', $gender);
         $gender = trim($gender);
 
         return mb_ucfirst($gender);

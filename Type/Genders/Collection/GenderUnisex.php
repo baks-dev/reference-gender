@@ -67,7 +67,7 @@ final class GenderUnisex implements GenderInterface
 
         $gender = mb_strtolower($gender);
         $gender = (string) str_ireplace($haystack, '', $gender);
-        $gender = preg_replace('/\s/', ' ', $gender);
+        $gender = preg_replace('/\s+/', ' ', $gender);
         $gender = trim($gender);
 
         return mb_ucfirst($gender);
