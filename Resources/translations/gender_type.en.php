@@ -21,52 +21,16 @@
  *  THE SOFTWARE.
  */
 
-declare(strict_types=1);
+return [
 
-namespace BaksDev\Reference\Gender\Choice;
+    'PLACEHOLDER' => 'choose the floor',
+    'Label' => 'Paul (gender)',
 
-use BaksDev\Core\Services\Fields\FieldsChoiceInterface;
-use BaksDev\Reference\Gender\Form\GenderFieldForm;
-use BaksDev\Reference\Gender\Type\Gender;
+    'Men' => 'male',
+    'Women' => 'female',
+    'Unisex' => 'unisex',
 
-final class ReferenceChoiceGender implements FieldsChoiceInterface
-{
-    public function equals($key): bool
-    {
-        return $key === Gender::TYPE;
-    }
-
-    public function type(): string
-    {
-        return Gender::TYPE;
-    }
-
-    public function class(): string
-    {
-        return Gender::class;
-    }
-
-
-    public function choice(): array
-    {
-        return Gender::cases();
-    }
-
-
-    public function domain(): string
-    {
-        return Gender::TYPE;
-    }
-
-
-    /** Возвращает класс формы для рендера */
-    public function form(): string
-    {
-        return GenderFieldForm::class;
-    }
-
-    public function constraints(): ?array
-    {
-        return null;
-    }
-}
+    'men' => 'male',
+    'women' => 'female',
+    'unisex' => 'unisex',
+];
