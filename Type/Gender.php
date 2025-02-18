@@ -23,6 +23,8 @@
 
 namespace BaksDev\Reference\Gender\Type;
 
+use BaksDev\Reference\Gender\Type\Genders\Collection\GenderBoy;
+use BaksDev\Reference\Gender\Type\Genders\Collection\GenderGirl;
 use BaksDev\Reference\Gender\Type\Genders\Collection\GenderMen;
 use BaksDev\Reference\Gender\Type\Genders\Collection\GenderUnisex;
 use BaksDev\Reference\Gender\Type\Genders\GenderInterface;
@@ -89,7 +91,7 @@ final class Gender
 
         foreach(self::getDeclared() as $key => $gender)
         {
-            if(false === $unisex && $gender === GenderUnisex::class)
+            if(false === $unisex && in_array($gender, [GenderUnisex::class, GenderBoy::class, GenderGirl::class], true))
             {
                 continue;
             }
