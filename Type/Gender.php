@@ -39,7 +39,6 @@ final class Gender
 
     private GenderInterface $gender;
 
-
     public function __construct(GenderInterface|self|string $gender)
     {
         if(is_string($gender) && class_exists($gender))

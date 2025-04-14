@@ -27,11 +27,17 @@ namespace BaksDev\Reference\Gender\Type\Tests;
 
 use BaksDev\Reference\Gender\Type\Gender;
 use BaksDev\Reference\Gender\Type\Genders\GenderCollection;
+use BaksDev\Reference\Gender\Type\Genders\GenderInterface;
 use BaksDev\Reference\Gender\Type\GenderType;
 use BaksDev\Wildberries\Orders\Type\WildberriesStatus\Status\Collection\WildberriesStatusInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Event\ConsoleCommandEvent;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\DependencyInjection\Attribute\When;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @group reference-gender
@@ -39,20 +45,29 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 #[When(env: 'test')]
 final class GenderTest extends KernelTestCase
 {
+    public static function setUpBeforeClass(): void
+    {
+        // Бросаем событие консольной комманды
+        $dispatcher = self::getContainer()->get(EventDispatcherInterface::class);
+        $event = new ConsoleCommandEvent(new Command(), new StringInput(''), new NullOutput());
+        $dispatcher->dispatch($event, 'console.command');
+    }
+
+
     public function testUseCase(): void
     {
         /** @var GenderCollection $GenderCollection */
         $GenderCollection = self::getContainer()->get(GenderCollection::class);
 
-        /** @var WildberriesStatusInterface $case */
+        /** @var GenderInterface $case */
         foreach($GenderCollection->cases() as $case)
         {
             $Gender = new Gender($case->getValue());
 
-            self::assertTrue($Gender->equals($case::class)); // немспейс интерфейса
-            self::assertTrue($Gender->equals($case)); // объект интерфейса
-            self::assertTrue($Gender->equals($case->getValue())); // срока
-            self::assertTrue($Gender->equals($Gender)); // объект класса
+            self::assertTrue($Gender->equals($case::class), message: $case::class.' => '.$case->getValue()); // немспейс интерфейса
+            self::assertTrue($Gender->equals($case), message: $case::class.' => '.$case->getValue()); // объект интерфейса
+            self::assertTrue($Gender->equals($case->getValue()), message: $case::class.' => '.$case->getValue()); // срока
+            self::assertTrue($Gender->equals($Gender), message: $case::class.' => '.$case->getValue()); // объект класса
 
             $GenderType = new GenderType();
             $platform = $this->getMockForAbstractClass(AbstractPlatform::class);
