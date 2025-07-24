@@ -70,7 +70,9 @@ final class GenderTest extends KernelTestCase
             self::assertTrue($Gender->equals($Gender), message: $case::class.' => '.$case->getValue()); // объект класса
 
             $GenderType = new GenderType();
-            $platform = $this->getMockForAbstractClass(AbstractPlatform::class);
+            $platform = $this
+                ->getMockBuilder(AbstractPlatform::class)
+                ->getMock();
 
             $convertToDatabase = $GenderType->convertToDatabaseValue($Gender, $platform);
             self::assertEquals($Gender->getGenderValue(), $convertToDatabase);
