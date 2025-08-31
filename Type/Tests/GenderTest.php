@@ -31,6 +31,7 @@ use BaksDev\Reference\Gender\Type\Genders\GenderInterface;
 use BaksDev\Reference\Gender\Type\GenderType;
 use BaksDev\Wildberries\Orders\Type\WildberriesStatus\Status\Collection\WildberriesStatusInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
@@ -39,10 +40,8 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\DependencyInjection\Attribute\When;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @group reference-gender
- */
 #[When(env: 'test')]
+#[Group('reference-gender')]
 final class GenderTest extends KernelTestCase
 {
     public static function setUpBeforeClass(): void
