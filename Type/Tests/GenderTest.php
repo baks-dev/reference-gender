@@ -44,17 +44,13 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 #[Group('reference-gender')]
 final class GenderTest extends KernelTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function testUseCase(): void
     {
         // Бросаем событие консольной комманды
         $dispatcher = self::getContainer()->get(EventDispatcherInterface::class);
         $event = new ConsoleCommandEvent(new Command(), new StringInput(''), new NullOutput());
         $dispatcher->dispatch($event, 'console.command');
-    }
 
-
-    public function testUseCase(): void
-    {
         /** @var GenderCollection $GenderCollection */
         $GenderCollection = self::getContainer()->get(GenderCollection::class);
 

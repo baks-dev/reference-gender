@@ -58,7 +58,7 @@ final class GenderWomen implements GenderInterface
     public static function equals(string $gender): bool
     {
         return array_any(self::HAYSTACK, static fn($item
-        ) => str_contains(mb_strtolower($gender), mb_strtolower($item)));
+        ) => mb_strtolower($gender) === mb_strtolower($item));
     }
 
     /**
