@@ -41,11 +41,6 @@ final class GenderGirl implements GenderInterface
         'girl',
     ];
 
-    public function getValue(): string
-    {
-        return self::GENDER;
-    }
-
     /**
      * Сортировка (чем меньше число - тем первым в итерации будет значение)
      */
@@ -73,5 +68,10 @@ final class GenderGirl implements GenderInterface
         $gender = trim($gender);
 
         return mb_ucfirst($gender);
+    }
+
+    public function getValue(): string
+    {
+        return self::GENDER;
     }
 }

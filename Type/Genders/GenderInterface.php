@@ -29,11 +29,6 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 interface GenderInterface
 {
     /**
-     * Возвращает значение (value)
-     */
-    public function getValue(): string;
-
-    /**
      * Сортировка (чем меньше число - тем первым в итерации будет значение)
      */
     public static function sort(): int;
@@ -47,4 +42,9 @@ interface GenderInterface
      * Метод фильтрует значение, удаляя его из строки
      */
     public static function filter(string $gender): string;
+
+    /**
+     * Возвращает значение (value)
+     */
+    public function getValue(): string;
 }

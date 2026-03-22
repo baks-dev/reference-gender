@@ -39,11 +39,6 @@ final class GenderUnisex implements GenderInterface
         'unisex',
     ];
 
-    public function getValue(): string
-    {
-        return self::GENDER;
-    }
-
     /**
      * Сортировка (чем меньше число - тем первым в итерации будет значение)
      */
@@ -71,5 +66,10 @@ final class GenderUnisex implements GenderInterface
         $gender = trim($gender);
 
         return mb_ucfirst($gender);
+    }
+
+    public function getValue(): string
+    {
+        return self::GENDER;
     }
 }

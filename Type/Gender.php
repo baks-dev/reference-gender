@@ -77,12 +77,32 @@ final class Gender
         throw new InvalidArgumentException(sprintf('Not found Gender %s', $gender));
     }
 
+    public function getGender(): GenderInterface
+    {
+        return $this->gender;
+    }
 
-    public function __toString(): string
+    public static function getDeclared(): array
+    {
+        return array_filter(
+            get_declared_classes(),
+            static function($className) {
+                return in_array(GenderInterface::class, class_implements($className), true);
+            },
+        );
+    }
+
+    public function equals(mixed $status): bool
+    {
+        $status = new self($status);
+
+        return $this->getGenderValue() === $status->getGenderValue();
+    }
+
+    public function getGenderValue(): string
     {
         return $this->gender->getValue();
     }
-
 
     public static function cases(bool $unisex = true): array
     {
@@ -105,32 +125,7 @@ final class Gender
         return $case;
     }
 
-    public static function getDeclared(): array
-    {
-        return array_filter(
-            get_declared_classes(),
-            static function($className) {
-                return in_array(GenderInterface::class, class_implements($className), true);
-            }
-        );
-    }
-
-
-    public function equals(mixed $status): bool
-    {
-        $status = new self($status);
-
-        return $this->getGenderValue() === $status->getGenderValue();
-    }
-
-
-    public function getGender(): GenderInterface
-    {
-        return $this->gender;
-    }
-
-
-    public function getGenderValue(): string
+    public function __toString(): string
     {
         return $this->gender->getValue();
     }
